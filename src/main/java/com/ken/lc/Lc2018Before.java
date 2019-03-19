@@ -1,8 +1,11 @@
 package com.ken.lc;
 
+import java.util.Arrays;
+
 /**
  * https://leetcode-cn.com/explore/featured/card/top-interview-quesitons-in-2018/261/before-you-start/
  */
+@SuppressWarnings("ALL")
 public class Lc2018Before {
 
 	/**
@@ -73,6 +76,10 @@ public class Lc2018Before {
 	 */
 	public static boolean searchMatrix(int[][] matrix, int target) {
 
+		if(matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+			return false;
+		}
+
 		int m = 0;
 		int n = matrix[0].length - 1;
 		boolean result = false;
@@ -115,6 +122,7 @@ public class Lc2018Before {
 		boolean result = false;
 		int mt,nt;
 
+		// TODO 计算逻辑存在问题
 		while (m1 - m0 > 1 || n1 - n0 > 1) {
 			mt = m1 - m0 > 1 ? (m0 + m1) / 2 : m0;
 			nt = n1 - n0 > 1 ? (n0 + n1) / 2 : n0;
@@ -133,5 +141,30 @@ public class Lc2018Before {
 			result = true;
 		}
 		return result;
+	}
+
+	/**
+	 * 合并两个有序数组<br/>
+	 * https://leetcode-cn.com/explore/interview/card/top-interview-quesitons-in-2018/261/before-you-start/1109/
+	 *
+	 * @param nums1
+	 * @param m
+	 * @param nums2
+	 * @param n
+	 */
+	public static void merge(int[] nums1, int m, int[] nums2, int n) {
+
+		int t = 0;
+		int vt = 0;
+		for(int i = 0; i < n; i++) {
+			nums1[m + i] = nums2[i];
+			t = m + i;
+			while(t > 0 && nums1[t-1] > nums1[t]) {
+				vt = nums1[t-1];
+				nums1[t-1] = nums1[t];
+				nums1[t] = vt;
+				t--;
+			}
+		}
 	}
 }

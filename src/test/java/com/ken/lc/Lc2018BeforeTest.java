@@ -3,6 +3,8 @@ package com.ken.lc;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class Lc2018BeforeTest {
 
 	@Test
@@ -72,9 +74,34 @@ public class Lc2018BeforeTest {
 	@Test
 	public void testSearchMatrixEx2() {
 
-		int[][] p = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}, {21, 22, 23, 24, 25}};
+		int[][] p = {{1, 2, 3, 4, 5},
+				{6, 7, 8, 9, 10},
+				{11, 12, 13, 14, 15},
+				{16, 17, 18, 19, 20},
+				{21, 22, 23, 24, 25}};
 		int ta = 15;
 		boolean ra = Lc2018Before.searchMatrixEx(p, ta);
 		Assert.assertTrue(ra);
+	}
+
+	@Test
+	public void testMerge() {
+		int[] nums1 = {1, 2, 3, 0, 0, 0};
+		int[] nums2 = {2, 5, 6};
+		int m = 3, n = 3;
+
+		Lc2018Before.merge(nums1, m, nums2, n);
+		Arrays.stream(nums1).forEach((i) -> System.out.print(i + (i == nums1.length ? "" : ",")));
+	}
+
+	@Test
+	public void testMerge2() {
+
+		int[] nums1 = {4, 5, 6, 0, 0, 0};
+		int[] nums2 = {1, 2, 3};
+		int m = 3, n = 3;
+
+		Lc2018Before.merge(nums1, m, nums2, n);
+		Arrays.stream(nums1).forEach((i) -> System.out.print(i + (i == nums1.length ? "" : ",")));
 	}
 }
