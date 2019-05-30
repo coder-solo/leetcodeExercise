@@ -7,6 +7,24 @@ import org.junit.Test;
 public class TencentDreamTest {
 
 	@Test
+	public void testFindMedianSortedArrays() {
+
+		int[] nums1 = {1, 3};
+		int[] nums2 = {2};
+		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		Assert.assertEquals(2, r, 0.01);
+	}
+
+	@Test
+	public void testFindMedianSortedArrays2() {
+
+		int[] nums1 = {1, 2};
+		int[] nums2 = {3, 4};
+		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		Assert.assertEquals(2.5, r, 0.01);
+	}
+
+	@Test
 	public void testAddTwoNumbers() {
 
 		ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
@@ -26,30 +44,8 @@ public class TencentDreamTest {
 		ListNode l2 = new ListNode(1, new ListNode(9, new ListNode(9, new ListNode(9,
 				new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9, new ListNode(9)))))))))));
 
-		System.out.println(l1);
-		System.out.println(l2);
 		ListNode r = TencentDream.addTwoNumbers(l1, l2);
 
-		System.out.println(r);
-	}
-
-	@Test
-	public void testIntLength() {
-		long a = 9999999991L + 9L;
-		System.out.println(a);
-	}
-
-	@Test
-	public void testListNode() {
-
-/*		ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
-		long v = TencentDream.parseListNode(l1);
-		System.out.println(v);*/
-
-		ListNode r1 = TencentDream.pickListNode(807L);
-		System.out.println(r1);
-		System.out.println(10L % 10);
-		System.out.println(10L / 10);
-
+		Assert.assertEquals("000000000001", r.toString());
 	}
 }

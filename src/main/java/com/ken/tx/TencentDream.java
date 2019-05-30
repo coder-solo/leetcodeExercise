@@ -8,11 +8,43 @@ import com.ken.tx.ext.ListNode;
 public class TencentDream {
 
 	/**
+	 * 寻找两个有序数组的中位数
+	 * <p>https://leetcode-cn.com/problems/median-of-two-sorted-arrays/</p>
+	 *
+	 * @param nums1
+	 * @param nums2
+	 * @return
+	 */
+	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+		int m1 = 0, m2 = 0, n1 = nums1.length - 1, n2 = nums2.length - 1;
+
+		while(m1 < n1 || m2 < n2) {
+
+			if(nums1[m1] < nums2[m2]) {
+				m1++;
+			} else {
+				m2++;
+			}
+			if (nums1[n1] > nums2[n2]) {
+				n1--;
+			} else {
+				n2--;
+			}
+		}
+
+		return 1d;
+	}
+
+	/**
 	 * Definition for singly-linked list.
 	 * public class ListNode {
 	 * int val;
 	 * ListNode next;
 	 * ListNode(int x) { val = x; }
+	 * <p>
+	 *
+	 * </p>
 	 * }
 	 */
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -28,48 +60,16 @@ public class TencentDream {
 		vt /= 10;
 
 		while(t1 != null || t2 != null) {
-			vt = t1.val + t2.val + vt;
+			vt = (t1 == null ? 0 : t1.val) + (t2 == null ? 0 : t2.val) + vt;
 			t = new ListNode(vt % 10);
 			last.next = t;
 			last = t;
 			vt /= 10;
+			if(t1 != null) t1 = t1.next;
+			if(t2 != null) t2 = t2.next;
 		}
+		if(vt > 0) last.next = new ListNode(vt);
 
-		return r;
-
-		// base
-//		long v1 = parseListNode(l1);
-//		long v2 = parseListNode(l2);
-//
-//		return pickListNode(v1 + v2);
-	}
-
-	public static long parseListNode(ListNode ln) {
-		long v = ln.val;
-		for(int i = 1; (ln = ln.next) != null; i++) {
-			v =  ln.val * (long)(Math.pow(10, i)) + v;
-		}
-		return v;
-	}
-
-	public static ListNode pickListNode(long v) {
-
-		int vi = (int) (v % 10);
-		ListNode r = new ListNode(vi);
-		ListNode last = r;
-		ListNode lt = null;
-		long vt = v / 10;
-		while (vt > 0) {
-			if(vt < 10) {
-				last.next = new ListNode((int)vt);
-				break;
-			}
-			vi = (int) (vt % 10);
-			lt = new ListNode(vi);
-			last.next = lt;
-			last = lt;
-			vt = vt / 10;
-		}
 		return r;
 	}
 }
