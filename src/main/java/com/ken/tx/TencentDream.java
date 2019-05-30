@@ -17,11 +17,31 @@ public class TencentDream {
 	 */
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
-		// base
-		long v1 = parseListNode(l1);
-		long v2 = parseListNode(l2);
+		ListNode t1 = l1;
+		ListNode t2 = l2;
+		int vt = t1.val + t2.val;
+		ListNode last = new ListNode(vt % 10);
+		ListNode r = last;
+		ListNode t = last;
+		t1 = t1.next;
+		t2 = t2.next;
+		vt /= 10;
 
-		return pickListNode(v1 + v2);
+		while(t1 != null || t2 != null) {
+			vt = t1.val + t2.val + vt;
+			t = new ListNode(vt % 10);
+			last.next = t;
+			last = t;
+			vt /= 10;
+		}
+
+		return r;
+
+		// base
+//		long v1 = parseListNode(l1);
+//		long v2 = parseListNode(l2);
+//
+//		return pickListNode(v1 + v2);
 	}
 
 	public static long parseListNode(ListNode ln) {
