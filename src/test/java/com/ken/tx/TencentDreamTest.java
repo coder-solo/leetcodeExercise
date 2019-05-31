@@ -25,6 +25,15 @@ public class TencentDreamTest {
 	}
 
 	@Test
+	public void testFindMedianSortedArrays3() {
+
+		int[] nums1 = {1, 2, 3, 4, 5, 6, 7, 8, 9,10,11};
+		int[] nums2 = {1, 2, 3, 4, 5, 6, 7, 8, 9,10,11};
+		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		System.out.println(r);
+	}
+
+	@Test
 	public void testAddTwoNumbers() {
 
 		ListNode l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
