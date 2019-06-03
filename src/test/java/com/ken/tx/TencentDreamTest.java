@@ -11,7 +11,7 @@ public class TencentDreamTest {
 
 		int[] nums1 = {1, 3};
 		int[] nums2 = {2};
-		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		double r = TencentDream.findMedianSortedArrays2(nums1, nums2);
 		Assert.assertEquals(2, r, 0.01);
 	}
 
@@ -20,7 +20,7 @@ public class TencentDreamTest {
 
 		int[] nums1 = {1, 2};
 		int[] nums2 = {3, 4};
-		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		double r = TencentDream.findMedianSortedArrays2(nums1, nums2);
 		Assert.assertEquals(2.5, r, 0.01);
 	}
 
@@ -29,7 +29,16 @@ public class TencentDreamTest {
 
 		int[] nums1 = {1, 2, 3, 4, 5, 6, 7, 8, 9,10,11};
 		int[] nums2 = {1, 2, 3, 4, 5, 6, 7, 8, 9,10,11};
-		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
+		double r = TencentDream.findMedianSortedArrays2(nums1, nums2);
+		System.out.println(r);
+	}
+
+	@Test
+	public void testFindMedianSortedArrays4() {
+
+		int[] nums1 = {};
+		int[] nums2 = {1};
+		double r = TencentDream.findMedianSortedArrays2(nums1, nums2);
 		System.out.println(r);
 	}
 

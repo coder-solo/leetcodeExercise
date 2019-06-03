@@ -18,10 +18,10 @@ public class TencentDream {
 	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
 
 		int m1 = 0, m2 = 0, n1 = nums1.length - 1, n2 = nums2.length - 1;
-		boolean isZone1 = false;
-		boolean isZone2 = false;
+		boolean isZone1 = nums1.length == 0 ? true : false;
+		boolean isZone2 = nums2.length == 0 ? true : false;
 
-		while ((n1 - m1 + n2 - m2) > 0) {
+		while ((n1 - m1 + n2 - m2) > 0 && (!isZone1 && !isZone2)) {
 
 			if (nums1[m1] < nums2[m2]) {
 				m1++;
@@ -35,11 +35,9 @@ public class TencentDream {
 			}
 			if (m1 > n1) {
 				isZone1 = true;
-				break;
 			}
 			if (m2 > n2) {
 				isZone2 = true;
-				break;
 			}
 		}
 		double r = 0d;
@@ -64,17 +62,77 @@ public class TencentDream {
 		return r;
 	}
 
-	/**
-	 * Definition for singly-linked list.
-	 * public class ListNode {
-	 * int val;
-	 * ListNode next;
-	 * ListNode(int x) { val = x; }
-	 * <p>
-	 * <p>
-	 * </p>
-	 * }
-	 */
+	public static double findMedianSortedArrays2(int[] nums1, int[] nums2) {
+
+		int m1 = 0, m2 = 0, n1 = nums1.length - 1, n2 = nums2.length - 1;
+		int t1 = 0, t2 = 0, t = 0;
+		boolean isZone1 = nums1.length == 0 ? true : false;
+		boolean isZone2 = nums2.length == 0 ? true : false;
+		boolean isLarge1 = false;
+
+		while((n1 - m1 + n2 - m2) > 0 && (!isZone1 && !isZone2)) {
+			t1 = (m1 + n1) / 2;
+			t2 = (m2 + n2) / 2;
+			isLarge1 = (n1 - m1) > (n2 - m2);
+			t = !isLarge1 ? (t1 - m1 + 1) : (t2 - m2 + 1);
+			if(nums1[t1] > nums2[t2]) {
+				if(isLarge1) {
+					n2 = n2 - t;
+					m1 = m1 + t;
+				} else {
+					n1 = n1 - t;
+					m2 = m2 + t;
+				}
+			} else {
+				if(!isLarge1) {
+					n2 = n2 - t;
+					m1 = m1 + t;
+				} else {
+					n1 = n1 - t;
+					m2 = m2 + t;
+				}
+			}
+			if (m1 > n1) {
+				isZone1 = true;
+			}
+			if (m2 > n2) {
+				isZone2 = true;
+			}
+		}
+
+		double r = 0d;
+		if (isZone1 || isZone2) {
+			if (isZone1) {
+				while (n2 - m2 > 1) {
+					n2--;
+					m2++;
+				}
+				r = n2 > m2 ? ((double) (nums2[m2] + nums2[n2])) / 2 : nums2[m2];
+			} else {
+				while (n1 - m1 > 1) {
+					n1--;
+					m1++;
+				}
+				r = n1 > m1 ? ((double) (nums1[m1] + nums1[n1])) / 2 : nums1[m1];
+			}
+		} else {
+			r = ((double) (nums1[m1] + nums2[m2])) / 2;
+		}
+
+		return 0d;
+	}
+
+		/**
+		 * Definition for singly-linked list.
+		 * public class ListNode {
+		 * int val;
+		 * ListNode next;
+		 * ListNode(int x) { val = x; }
+		 * <p>
+		 * <p>
+		 * </p>
+		 * }
+		 */
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
 		ListNode t1 = l1;
