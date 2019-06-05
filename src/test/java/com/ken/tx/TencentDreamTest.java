@@ -7,6 +7,27 @@ import org.junit.Test;
 public class TencentDreamTest {
 
 	@Test
+	public void testLongestPalindrome() {
+
+		String r = TencentDream.longestPalindrome("babad");
+		Assert.assertEquals("bab", r);
+	}
+
+	@Test
+	public void testLongestPalindrome2() {
+
+		String r = TencentDream.longestPalindrome("cbbd");
+		Assert.assertEquals("bb", r);
+	}
+
+	@Test
+	public void testLongestPalindrome3() {
+
+		String r = TencentDream.longestPalindrome("ccc");
+		Assert.assertEquals("ccc", r);
+	}
+
+	@Test
 	public void testFindMedianSortedArrays() {
 
 		int[] nums1 = {1, 3};

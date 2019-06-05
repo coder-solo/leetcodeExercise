@@ -8,6 +8,137 @@ import com.ken.tx.ext.ListNode;
 public class TencentDream {
 
 	/**
+	 * 最长回文子串
+	 * <p>https://leetcode-cn.com/problems/longest-palindromic-substring/</p>
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static String longestPalindrome(String s) {
+
+		if (s == null || "".equals(s)) {
+			return "";
+		}
+
+		char[] chars = s.toCharArray();
+		int len = chars.length;
+		int ti = 0;
+		int tj = 0;
+		int k = 0;
+		String r = "";
+		int tMax = 1;
+		String tMaxStr = chars[0] + "";
+		boolean isR = true;
+
+		for (int i = 0; i < len - 1; i++) {
+			k = 1;
+			r = "" + chars[i];
+			ti = i - 1;
+			tj = i + 1;
+			while (ti > -1 && tj < len) {
+				if (chars[ti] == chars[tj]) {
+					k = k + 2;
+					r = chars[ti] + r + chars[tj];
+					ti--;
+					tj++;
+				} else {
+					break;
+				}
+			}
+			if (k > tMax) {
+				tMax = k;
+				tMaxStr = r;
+			}
+
+			if (chars[i] == chars[i + 1]) {
+				k = 2;
+				r = "" + chars[i] + chars[i + 1];
+
+				ti = i - 1;
+				tj = i + 2;
+				while (ti > -1 && tj < len) {
+					if (chars[ti] == chars[tj]) {
+						k = k + 2;
+						r = chars[ti] + r + chars[tj];
+						ti--;
+						tj++;
+					} else {
+						break;
+					}
+				}
+				if (k > tMax) {
+					tMax = k;
+					tMaxStr = r;
+				}
+			}
+		}
+
+		return tMaxStr;
+	}
+
+	/**
+	 * 最长回文子串
+	 * <p>https://leetcode-cn.com/problems/longest-palindromic-substring/</p>
+	 *
+	 * @param s
+	 * @return
+	 */
+	public static String longestPalindromeBad(String s) {
+
+		if (s == null || "".equals(s)) {
+			return "";
+		}
+
+		char[] chars = s.toCharArray();
+		int len = chars.length;
+		int ti = 0;
+		int tj = 0;
+		int k = 0;
+		String r = "";
+		int tMax = 0;
+		String tMaxStr = "";
+		boolean isR = true;
+
+		for (int i = 0; i < len; i++) {
+			k = 0;
+			r = "";
+			for (int j = len - 1; j > i; j--) {
+				ti = i;
+				tj = j;
+				k = 0;
+				r = "";
+				isR = true;
+				for (; tj >= ti; tj--, ti++) {
+					if (chars[ti] != chars[tj]) {
+						isR = false;
+						break;
+					} else {
+						k = tj == ti ? k + 1 : k + 2;
+						r = r + chars[ti];
+					}
+				}
+				if (isR) {
+					if (k > tMax) {
+						tMax = k;
+						tMaxStr = r;
+					}
+				}
+			}
+		}
+		if (tMax > 0) {
+			char[] rChars = tMaxStr.toCharArray();
+			String result = "";
+			for (int i = tMax % 2 == 1 ? rChars.length - 2 : rChars.length - 1; i > -1; i--) {
+				tMaxStr += rChars[i];
+			}
+		} else {
+			tMaxStr = chars[0] + "";
+		}
+
+		return tMaxStr;
+	}
+
+	/**
 	 * 寻找两个有序数组的中位数
 	 * <p>https://leetcode-cn.com/problems/median-of-two-sorted-arrays/</p>
 	 *
@@ -70,13 +201,13 @@ public class TencentDream {
 		boolean isZone2 = nums2.length == 0 ? true : false;
 		boolean isLarge1 = false;
 
-		while((n1 - m1 + n2 - m2) > 0 && (!isZone1 && !isZone2)) {
+		while ((n1 - m1 + n2 - m2) > 0 && (!isZone1 && !isZone2)) {
 			t1 = (m1 + n1) / 2;
 			t2 = (m2 + n2) / 2;
 			isLarge1 = (n1 - m1) > (n2 - m2);
 			t = !isLarge1 ? (t1 - m1 + 1) : (t2 - m2 + 1);
-			if(nums1[t1] > nums2[t2]) {
-				if(isLarge1) {
+			if (nums1[t1] > nums2[t2]) {
+				if (isLarge1) {
 					n2 = n2 - t;
 					m1 = m1 + t;
 				} else {
@@ -84,7 +215,7 @@ public class TencentDream {
 					m2 = m2 + t;
 				}
 			} else {
-				if(!isLarge1) {
+				if (!isLarge1) {
 					n2 = n2 - t;
 					m1 = m1 + t;
 				} else {
@@ -103,17 +234,9 @@ public class TencentDream {
 		double r = 0d;
 		if (isZone1 || isZone2) {
 			if (isZone1) {
-				while (n2 - m2 > 1) {
-					n2--;
-					m2++;
-				}
-				r = n2 > m2 ? ((double) (nums2[m2] + nums2[n2])) / 2 : nums2[m2];
+				r = (n2 - m2) % 2 == 1 ? ((double) (nums2[(m2 + n2) / 2] + nums2[(m2 + n2) / 2 + 1])) / 2 : nums2[(m2 + n2) / 2];
 			} else {
-				while (n1 - m1 > 1) {
-					n1--;
-					m1++;
-				}
-				r = n1 > m1 ? ((double) (nums1[m1] + nums1[n1])) / 2 : nums1[m1];
+				r = (n1 - m1) % 2 == 1 ? ((double) (nums1[(m1 + n1) / 2] + nums1[(m1 + n1) / 2 + 1])) / 2 : nums1[(m1 + n1) / 2];
 			}
 		} else {
 			r = ((double) (nums1[m1] + nums2[m2])) / 2;
@@ -122,17 +245,17 @@ public class TencentDream {
 		return 0d;
 	}
 
-		/**
-		 * Definition for singly-linked list.
-		 * public class ListNode {
-		 * int val;
-		 * ListNode next;
-		 * ListNode(int x) { val = x; }
-		 * <p>
-		 * <p>
-		 * </p>
-		 * }
-		 */
+	/**
+	 * Definition for singly-linked list.
+	 * public class ListNode {
+	 * int val;
+	 * ListNode next;
+	 * ListNode(int x) { val = x; }
+	 * <p>
+	 * <p>
+	 * </p>
+	 * }
+	 */
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
 		ListNode t1 = l1;
