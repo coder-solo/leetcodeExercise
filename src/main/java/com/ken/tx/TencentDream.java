@@ -14,6 +14,51 @@ public class TencentDream {
 	 * @param s
 	 * @return
 	 */
+	public static int longestPalindromeBest(String s) {
+
+		if(s == null || s.length() < 1){
+			return 0;
+		}
+		char[] charArr = manacherString(s);
+		int[] radius = new int[charArr.length];
+		int R = -1;
+		int c = -1;
+		int max = Integer.MIN_VALUE;
+		for (int i = 0; i < radius.length; i++) {
+			radius[i] = R > i ? Math.min(radius[2*c-i],R-i+1):1;
+			while(i+radius[i] < charArr.length && i - radius[i] > -1){
+				if(charArr[i-radius[i]] == charArr[i+radius[i]]){
+					radius[i]++;
+				}else{
+					break;
+				}
+			}
+			if(i + radius[i] > R){
+				R = i + radius[i]-1;
+				c = i;
+			}
+			max = Math.max(max,radius[i]);
+		}
+		return max-1;
+	}
+
+	public static char[] manacherString(String str){
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < str.length(); i++) {
+			sb.append("#");
+			sb.append(str.charAt(i));
+		}
+		sb.append("#");
+		return sb.toString().toCharArray();
+	}
+
+	/**
+	 * 最长回文子串
+	 * <p>https://leetcode-cn.com/problems/longest-palindromic-substring/</p>
+	 *
+	 * @param s
+	 * @return
+	 */
 	public static String longestPalindrome(String s) {
 
 		if (s == null || "".equals(s)) {
@@ -242,7 +287,7 @@ public class TencentDream {
 			r = ((double) (nums1[m1] + nums2[m2])) / 2;
 		}
 
-		return 0d;
+		return r;
 	}
 
 	/**

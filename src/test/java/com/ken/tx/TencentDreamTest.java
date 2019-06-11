@@ -9,7 +9,7 @@ public class TencentDreamTest {
 	@Test
 	public void testLongestPalindrome() {
 
-		String r = TencentDream.longestPalindrome("babad");
+		int r = TencentDream.longestPalindromeBest("ababcbas");
 		Assert.assertEquals("bab", r);
 	}
 
@@ -32,7 +32,7 @@ public class TencentDreamTest {
 
 		int[] nums1 = {1, 3};
 		int[] nums2 = {2};
-		double r = TencentDream.findMedianSortedArrays2(nums1, nums2);
+		double r = TencentDream.findMedianSortedArrays(nums1, nums2);
 		Assert.assertEquals(2, r, 0.01);
 	}
 
